@@ -1,12 +1,24 @@
-output "result" {
-    value = "hello TF Script Club"
+data "akamai_group" "my_group_id" {
+    group_name  = "TC East-1-5C13O2"
+    contract_id = "ctr_1-5C13O2"
+}
+output "my_group_id" {
+    value = data.akamai_group.my_group_id
 }
 
-data "akamai_property" "my_property" {
-    name = "jfuentes-scriptclub"
-    group_id    = "299415"
-    contract_id = "1-5C13O2"
-    property_id = "1259379"
-    product_id = "Fresca"
+data "akamai_properties" "my_properties" {
+    group_id    = "grp_299415"
+    contract_id = "ctr_1-5C13O2"
+}
+
+output "my_properties" {
+  value = data.akamai_properties.my_properties
+}
+
+data "akamai_appsec_configuration" "all-configurations" {
+}
+
+output "configuration-list" {
+  value = data.akamai_appsec_configuration.all-configurations.output_text
 }
 
